@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5c284095-75a5-47a9-8ef5-273eec6a10ff"
+      }
+    },
+    "owner": "nicolasjosino"
   }
 }
