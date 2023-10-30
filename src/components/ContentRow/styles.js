@@ -1,20 +1,15 @@
 import { StyleSheet } from "react-native"
+import { themes } from "../../theme/themes"
 
 export const styles = StyleSheet.create({
   contentRow: {
-    marginHorizontal: 10,
-    marginBottom: 40,
-    paddingHorizontal: 10,
-    paddingTop: 10,
-    paddingBottom: 30,
-    // borderRadius: 10,
-    // borderWidth: 1,
-    backgroundColor: '#1D1D27',
+    marginVertical: 25,
+    backgroundColor: themes.background,
   },
   title: {
     fontSize: 25,
     fontWeight: 'bold',
-    color: 'white',
+    color: themes.text,
     marginBottom: 15
   }
 })

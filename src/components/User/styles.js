@@ -1,14 +1,15 @@
 import { StyleSheet } from "react-native";
+import { themes } from "../../theme/themes";
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
+    marginHorizontal: 15,
   },
   welcome: {
     fontSize: 35,
     fontWeight: 'bold',
-    color: 'white',
-    marginLeft: 10,
-    marginVertical: 25
+    color: themes.text,
+    marginTop: 20
   }
 })

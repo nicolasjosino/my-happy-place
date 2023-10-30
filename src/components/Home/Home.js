@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { Image, ImageBackground, Pressable, Text, View, StyleSheet } from 'react-native';
+import { themes } from '../../theme/themes';
 
 export default function Home() {
   return (
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 40,
     fontWeight: 'bold',
-    color: 'white',
+    color: themes.text,
     marginBottom: 20
   },
   button: {
@@ -42,13 +43,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     borderRadius: 10,
     elevation: 3,
-    backgroundColor: '#BF246D',
+    backgroundColor: themes.accent,
   },
   text: {
     fontSize: 16,
     lineHeight: 21,
     fontWeight: 'bold',
     letterSpacing: 0.25,
-    color: 'white',
+    color: themes.text,
   },
 });
