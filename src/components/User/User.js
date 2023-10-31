@@ -8,9 +8,9 @@ export default function User(props) {
       <View>
         <Text style={styles.welcome}>Olá, {props.name}!</Text>
       </View>
-      <ContentRow rowName='Seus Favoritos' data={props.favorites}></ContentRow>
-      <ContentRow rowName='Filmes em Alta' data={props.favorites}></ContentRow>
-      <ContentRow rowName='Séries em Alta' data={props.favorites}></ContentRow>
+      <ContentRow rowName='Seus Favoritos' data={props.favorites} />
+      <ContentRow rowName='Filmes em Alta' data={props.favorites} />
+      <ContentRow rowName='Séries em Alta' data={props.favorites} />
     </ScrollView>
   )
 }
