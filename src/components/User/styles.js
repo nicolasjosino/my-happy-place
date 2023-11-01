@@ -10,6 +10,5 @@ export const styles = StyleSheet.create({
     fontSize: 35,
     fontWeight: 'bold',
     color: themes.text,
-    marginTop: 20
   }
 })
