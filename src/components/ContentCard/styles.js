@@ -17,13 +17,18 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 8,
-    paddingHorizontal: 5
+    marginHorizontal: 6,
+  },
+  contentView: {
+    flex: 2
   },
   title: {
+    flex: 2,
     fontWeight: 'bold',
-    color: themes.text
+    color: themes.text,
   },
   releaseYear: {
+    flex: 3,
     fontWeight: '400',
     color: themes.text
   },

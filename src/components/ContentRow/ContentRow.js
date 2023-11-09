@@ -15,7 +15,7 @@ export default function ContentRow(props) {
             <ContentCard
               posterPath={`https://image.tmdb.org/t/p/original${item.posterPath}`}
               name={item.name}
-              releaseYear={item.releaseYear}
+              releaseDate={item.releaseDate}
               isFavorite={item.isFavorite}
             />
           )

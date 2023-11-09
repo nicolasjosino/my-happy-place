@@ -7,13 +7,13 @@ export default function ContentCard(props) {
     <View style={styles.container}>
       <Image
         style={styles.poster}
-        src={props.posterPath}
+        source={props.posterPath}
       >
       </Image>
       <View style={styles.details}>
-        <View>
-          <Text style={styles.title}>{props.name}</Text>
-          <Text style={styles.releaseYear}>{props.releaseYear}</Text>
+        <View style={styles.contentView}>
+          <Text numberOfLines={1} style={styles.title}>{props.name}</Text>
+          <Text style={styles.releaseYear}>{props.releaseDate}</Text>
         </View>
         <Favorite isFavorite={props.isFavorite} />
       </View>

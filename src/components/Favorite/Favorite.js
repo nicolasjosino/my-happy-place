@@ -1,6 +1,6 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useState } from 'react';
-import { Pressable } from 'react-native';
+import { Pressable, Text } from 'react-native';
 
 export default function Favorite(props) {
   const [isFavorite, setFavorite] = useState(props.isFavorite);
