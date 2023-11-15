@@ -7,6 +7,9 @@ export const styles = StyleSheet.create({
     marginHorizontal: 15,
     justifyContent: 'center'
   },
+  spinner: {
+    marginTop: '100%'
+  },
   welcome: {
     fontSize: 35,
     fontWeight: 'bold',
