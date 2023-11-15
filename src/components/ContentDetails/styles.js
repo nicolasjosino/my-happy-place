@@ -30,6 +30,18 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 25,
   },
+  button: {
+    paddingVertical: 9,
+    paddingHorizontal: 28,
+    borderRadius: 10,
+    elevation: 3,
+    backgroundColor: themes.accent,
+  },
+  buttonText: {
+    color: themes.text,
+    fontSize: 14,
+    fontWeight: '500'
+  },
   sectionTitle: {
     fontSize: 23,
     fontWeight: 'bold',
