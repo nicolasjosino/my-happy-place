@@ -9,6 +9,7 @@ export default function ContentDetails(props) {
   const api = 'http://192.168.0.8:8080';
   const [loading, setLoading] = useState(true);
   const [content, setContent] = useState({});
+  const [similar, setSimilar] = useState([]);
 
   function getContent(mediaType, idTMDB) {
     const pathParam = mediaType == 'movie' ? 'movies' : 'series';
@@ -16,7 +17,17 @@ export default function ContentDetails(props) {
       .then(response => response.json())
       .then(data => {
         setContent(data);
-        setLoading(false);})
+        getSimilar(mediaType, idTMDB);
+        setLoading(false);
+      })
+      .catch(error => console.error(error));
+  }
+
+  function getSimilar(mediaType, idTMDB) {
+    const pathParam = mediaType == 'movie' ? 'movies' : 'series';
+    fetch(`${api}/${pathParam}/${idTMDB}/recommendations?idUser=1&page=1`)
+      .then(response => response.json())
+      .then(data => setSimilar(data))
       .catch(error => console.error(error));
   }
 
@@ -33,14 +44,14 @@ export default function ContentDetails(props) {
   return (
     <View style={styles.container}>
       {loading ? (
-        <ActivityIndicator 
-          color={themes.accent} 
-          size={"large"} 
+        <ActivityIndicator
+          color={themes.accent}
+          size={"large"}
           style={styles.spinner}
         />
       ) : (
         <ScrollView showsVerticalScrollIndicator={false} >
-        <Text>{console.log(content)}</Text>
+          <Text>{console.log(content)}</Text>
           <Image style={styles.poster} source={`https://image.tmdb.org/t/p/original${content.backdropPath}`} />
           <View style={{ marginHorizontal: 15 }}>
             <Text style={[styles.title, styles.text]}>{content.name}</Text>
@@ -60,7 +71,7 @@ export default function ContentDetails(props) {
             >
               <Text style={[styles.sectionTitle, styles.text]}>Disponível em:</Text>
             </ScrollView>
-            <ContentRow rowName="Similares" data={content.recommendations} />
+            <ContentRow rowName="Similares" data={similar} />
           </View>
         </ScrollView>
       )}
