@@ -52,7 +52,7 @@ export default function ContentDetails(props) {
         />
       ) : (
         <ScrollView showsVerticalScrollIndicator={false} >
-          <Image style={styles.poster} source={`https://image.tmdb.org/t/p/original${content.backdropPath}`} />
+          <Image style={styles.poster} src={`https://image.tmdb.org/t/p/original${content.backdropPath}`} />
           <View style={{ marginHorizontal: 15 }}>
             <Text style={[styles.title, styles.text]}>{content.name}</Text>
             <View style={styles.details}>

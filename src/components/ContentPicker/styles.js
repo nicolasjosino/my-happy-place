@@ -4,7 +4,7 @@ import { themes } from "../../theme/themes";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 10,
+    backgroundColor: themes.background
   },
   header: {
     color: themes.text,

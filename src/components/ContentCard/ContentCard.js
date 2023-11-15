@@ -7,7 +7,7 @@ export default function ContentCard(props) {
     <View style={styles.container}>
       <Image
         style={styles.poster}
-        source={props.posterPath}
+        src={props.posterPath}
       >
       </Image>
       <View style={styles.details}>

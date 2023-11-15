@@ -41,7 +41,7 @@ export default function User(props) {
   }, []);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       {loading ? (
         <ActivityIndicator
           color={themes.accent}
@@ -49,7 +49,7 @@ export default function User(props) {
           style={styles.spinner}
         />
       ) : (
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.contentContainer}>
           <View>
             <Text style={styles.welcome}>Olá, {props.name}!</Text>
           </View>

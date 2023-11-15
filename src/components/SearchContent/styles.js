@@ -4,7 +4,7 @@ import { themes } from "../../theme/themes";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 10
+    backgroundColor: themes.background
   },
   searchBarContainer: {
     backgroundColor: '#1D1D27',
