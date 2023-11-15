@@ -53,9 +53,21 @@ export default function User(props) {
           <View>
             <Text style={styles.welcome}>Olá, {props.name}!</Text>
           </View>
-          <ContentRow rowName='Seus Favoritos' data={favorites} />
-          <ContentRow rowName='Filmes em Alta' data={trendingMovies} />
-          <ContentRow rowName='Séries em Alta' data={trendingTv} />
+          <ContentRow 
+            rowName='Seus Favoritos' 
+            data={favorites} 
+            getFavorites={getFavorites}
+          />
+          <ContentRow 
+            rowName='Filmes em Alta' 
+            data={trendingMovies}
+            getFavorites={getFavorites}
+          />
+          <ContentRow 
+            rowName='Séries em Alta'
+            data={trendingTv} 
+            getFavorites={getFavorites}
+          />
         </ScrollView>
       )}
     </SafeAreaView>

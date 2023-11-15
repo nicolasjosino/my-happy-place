@@ -13,10 +13,13 @@ export default function ContentRow(props) {
         renderItem={({ item }) => {
           return (
             <ContentCard
+              idTMDB={item.idTMDB}
               posterPath={`https://image.tmdb.org/t/p/original${item.posterPath}`}
               name={item.name}
+              mediaType={item.mediaType}
               releaseDate={item.releaseDate}
               isFavorite={item.isFavorite}
+              getFavorites={props.getFavorites}
             />
           )
         }}

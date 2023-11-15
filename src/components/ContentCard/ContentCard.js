@@ -15,7 +15,12 @@ export default function ContentCard(props) {
           <Text numberOfLines={1} style={styles.title}>{props.name}</Text>
           <Text style={styles.releaseYear}>{props.releaseDate}</Text>
         </View>
-        <Favorite isFavorite={props.isFavorite} />
+        <Favorite 
+          isFavorite={props.isFavorite}
+          idTMDB={props.idTMDB}
+          mediaType={props.mediaType}
+          getFavorites={props.getFavorites}
+        />
       </View>
     </View>
   )
