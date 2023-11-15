@@ -4,15 +4,14 @@ import { themes } from "../../theme/themes";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // marginHorizontal: 15,
+  },
+  spinner: {
+    marginTop: '100%'
   },
   poster: {
     width: "100%",
     height: 250,
     flex: 1,
-    // borderRadius: 20,
-    // borderWidth: 3,
-    // borderColor: '#aeabab2b',
     alignSelf: 'center'
   },
   text: {
