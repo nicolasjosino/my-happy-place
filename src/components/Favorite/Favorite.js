@@ -14,17 +14,18 @@ export default function Favorite(props) {
         {
           id: 1,
         },
-      ],  
+      ],
     };
     props.mediaType == 'tv' ? (body.serieId = props.idTMDB) : (body.movieId = props.idTMDB);
 
-    console.log(JSON.stringify(body));
     fetch(url, {
-      method: !isFavorite ? 'POST' : 'PUT',
-      body: JSON.stringify(body)
+      headers: {
+        'Accept': "application/json, text/plain, */*",
+        'Content-Type': "application/json;charset=utf-8"
+      },
+      body: JSON.stringify(body),
+      method: !isFavorite ? 'POST' : 'PUT'
     })
-      .then(response => response.json())
-      .then(json => console.log(json))
       .then(setFavorite(!isFavorite));
   }
 
