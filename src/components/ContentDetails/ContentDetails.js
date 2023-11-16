@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Image, ScrollView, Text, View } from "react-native";
+import { useNavigation, useRoute } from '@react-navigation/native';
 import ContentRow from "../ContentRow/ContentRow";
 import Favorite from "../Favorite/Favorite";
 import { styles } from "./styles";
@@ -7,10 +8,20 @@ import { themes } from "../../theme/themes";
 import { Pressable } from "react-native";
 
 export default function ContentDetails(props) {
-  const api = 'http://192.168.0.8:8080';
+  
+  const api = 'http://192.168.1.8:8080';
   const [loading, setLoading] = useState(true);
   const [content, setContent] = useState({});
   const [similar, setSimilar] = useState([]);
+
+  const navigation = useNavigation();
+  const route = useRoute();
+  const media = route.params.item;
+
+  function handleGoBack() {
+    navigation.goBack();
+  }
+
 
   function getContent(mediaType, idTMDB) {
     const pathParam = mediaType == 'movie' ? 'movies' : 'series';
@@ -33,7 +44,7 @@ export default function ContentDetails(props) {
   }
 
   useEffect(() => {
-    getContent(props.mediaType, props.idTMDB);
+    getContent(media.mediaType, media.idTMDB);
   }, [])
 
   function getRuntime(runtime) {
@@ -52,14 +63,14 @@ export default function ContentDetails(props) {
         />
       ) : (
         <ScrollView showsVerticalScrollIndicator={false} >
-          <Image style={styles.poster} src={`https://image.tmdb.org/t/p/original${content.backdropPath}`} />
+          <Image style={styles.poster} src={`https://image.tmdb.org/t/p/original${content.posterPath}`} />
           <View style={{ marginHorizontal: 15 }}>
             <Text style={[styles.title, styles.text]}>{content.name}</Text>
             <View style={styles.details}>
               <Text style={[styles.detailsText, styles.text]}>{content?.releaseDate.substring(0, 4)}</Text>
-              {props.mediaType == 'movie' &&
+              {media.mediaType == 'movie' &&
                 <Text style={[styles.detailsText, styles.text]}>{getRuntime(content.runtime)}</Text>}
-              {props.mediaType == 'tv' &&
+              {media.mediaType == 'tv' &&
                 <Pressable
                   style={({ pressed }) => [styles.button, pressed && { opacity: 0.8 }]}
                 >

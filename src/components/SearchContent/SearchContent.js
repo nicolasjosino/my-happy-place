@@ -5,7 +5,7 @@ import { FlatList, Image, Pressable, SafeAreaView, Text, TextInput, View } from 
 import { styles } from "./styles";
 
 export default function SearchContent() {
-  const api = 'http://192.168.0.8:8080';
+  const api = 'http://192.168.1.8:8080';
   const [searchResults, setSearchResults] = useState([]);
   const [searchText, onChangeText] = useState('');
 

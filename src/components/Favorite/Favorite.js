@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Pressable, Text } from 'react-native';
 
 export default function Favorite(props) {
-  const api = 'http://192.168.0.8:8080';
+  const api = 'http://192.168.1.8:8080';
   const [isFavorite, setFavorite] = useState(props.isFavorite);
   let icon = isFavorite ? "md-heart" : "md-heart-outline";
 

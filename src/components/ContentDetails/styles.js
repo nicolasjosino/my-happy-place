@@ -4,6 +4,7 @@ import { themes } from "../../theme/themes";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: themes.background
   },
   spinner: {
     marginTop: '100%'

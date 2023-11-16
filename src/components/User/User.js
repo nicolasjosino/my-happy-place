@@ -1,16 +1,24 @@
 import { ActivityIndicator, SafeAreaView, ScrollView, Text, View } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 import ContentRow from "../ContentRow/ContentRow";
 import { styles } from "./styles";
 import { useEffect, useState } from "react";
 import { themes } from "../../theme/themes";
 
 export default function User(props) {
-  const api = 'http://192.168.0.8:8080';
+  const api = 'http://192.168.1.8:8080';
 
   const [loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState([]);
   const [trendingTv, setTrendingTv] = useState([]);
   const [trendingMovies, setTrendingMovies] = useState([]);
+
+  const navigation = useNavigation();
+
+  function handleOpenDetails(item) {
+    console.log(item);
+    navigation.navigate('ContentDetails', { item });
+  }
 
   function getFavorites() {
     fetch(`${api}/users/1/findFavorites`)
@@ -57,6 +65,7 @@ export default function User(props) {
             rowName='Seus Favoritos' 
             data={favorites} 
             getFavorites={getFavorites}
+            details={handleOpenDetails}
           />
           <ContentRow 
             rowName='Filmes em Alta' 
