@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
   },
   buttonGroup: {
     marginTop: '30%',
+    paddingHorizontal: 50
     // alignSelf: 'center'
   },
   button: {
