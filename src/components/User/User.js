@@ -70,11 +70,13 @@ export default function User(props) {
             rowName='Filmes em Alta' 
             data={trendingMovies}
             getFavorites={getFavorites}
+            details={handleOpenDetails}
           />
           <ContentRow 
             rowName='Séries em Alta'
             data={trendingTv} 
             getFavorites={getFavorites}
+            details={handleOpenDetails}
           />
         </ScrollView>
       )}
