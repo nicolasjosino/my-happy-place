@@ -11,6 +11,7 @@ export default function User(props) {
   const api = 'http://192.168.1.8:8080';
 
   const [loading, setLoading] = useState(true);
+  const [username, setUsername] = useState('');
   const [favorites, setFavorites] = useState([]);
   const [trendingTv, setTrendingTv] = useState([]);
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -19,6 +20,13 @@ export default function User(props) {
 
   function handleOpenDetails(item) {
     navigation.navigate('ContentDetails', { item });
+  }
+
+  function getUsername() {
+    fetch(`${api}/users/1`)
+      .then(response => response.json())
+      .then(data => setUsername(data.name))
+      .catch(error => console.error(error));
   }
 
   function getFavorites() {
@@ -43,6 +51,7 @@ export default function User(props) {
   }
 
   useEffect(() => {
+    getUsername();
     getFavorites();
     getTrendingTv();
     getTrendingMovies();
