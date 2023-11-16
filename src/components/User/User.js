@@ -16,7 +16,6 @@ export default function User(props) {
   const navigation = useNavigation();
 
   function handleOpenDetails(item) {
-    console.log(item);
     navigation.navigate('ContentDetails', { item });
   }
 
