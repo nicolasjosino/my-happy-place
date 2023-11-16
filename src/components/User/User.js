@@ -5,10 +5,11 @@ import { styles } from "./styles";
 import { useEffect, useState } from "react";
 import { themes } from "../../theme/themes";
 
-export default function User(props) {
+export default function User() {
   const api = 'http://192.168.1.8:8080';
 
   const [loading, setLoading] = useState(true);
+  const [username, setUsername] = useState('');
   const [favorites, setFavorites] = useState([]);
   const [trendingTv, setTrendingTv] = useState([]);
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -17,6 +18,13 @@ export default function User(props) {
 
   function handleOpenDetails(item) {
     navigation.navigate('ContentDetails', { item });
+  }
+
+  function getUsername() {
+    fetch(`${api}/users/1`)
+      .then(response => response.json())
+      .then(data => setUsername(data.name))
+      .catch(error => console.error(error));
   }
 
   function getFavorites() {
@@ -41,6 +49,7 @@ export default function User(props) {
   }
 
   useEffect(() => {
+    getUsername();
     getFavorites();
     getTrendingTv();
     getTrendingMovies();
@@ -58,22 +67,22 @@ export default function User(props) {
       ) : (
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.contentContainer}>
           <View>
-            <Text style={styles.welcome}>Olá, {props.name}!</Text>
+            <Text style={styles.welcome}>Olá, {username}!</Text>
           </View>
-          <ContentRow 
-            rowName='Seus Favoritos' 
-            data={favorites} 
+          <ContentRow
+            rowName='Seus Favoritos'
+            data={favorites}
             getFavorites={getFavorites}
             details={handleOpenDetails}
           />
-          <ContentRow 
-            rowName='Filmes em Alta' 
+          <ContentRow
+            rowName='Filmes em Alta'
             data={trendingMovies}
             getFavorites={getFavorites}
           />
-          <ContentRow 
+          <ContentRow
             rowName='Séries em Alta'
-            data={trendingTv} 
+            data={trendingTv}
             getFavorites={getFavorites}
           />
         </ScrollView>
