@@ -13,7 +13,7 @@ export default function ContentCard(props) {
       <View style={styles.details}>
         <View style={styles.contentView}>
           <Text numberOfLines={1} style={styles.title}>{props.name}</Text>
-          <Text style={styles.releaseYear}>{props.releaseDate}</Text>
+          <Text style={styles.releaseYear}>{props.releaseDate.substring(0, 4)}</Text>
         </View>
         <Favorite 
           isFavorite={props.isFavorite}
