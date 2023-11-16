@@ -1,9 +1,11 @@
-import { ActivityIndicator, SafeAreaView, ScrollView, Text, View } from "react-native";
+import { ActivityIndicator, SafeAreaView, ScrollView, Text, View, Image } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import ContentRow from "../ContentRow/ContentRow";
 import { styles } from "./styles";
 import { useEffect, useState } from "react";
 import { themes } from "../../theme/themes";
+
+import logo from '../../assets/Logo_MHP.png';
 
 export default function User(props) {
   const api = 'http://192.168.1.8:8080';
@@ -56,29 +58,35 @@ export default function User(props) {
           style={styles.spinner}
         />
       ) : (
-        <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.contentContainer}>
-          <View>
-            <Text style={styles.welcome}>Olá, {props.name}!</Text>
-          </View>
-          <ContentRow 
-            rowName='Seus Favoritos' 
-            data={favorites} 
-            getFavorites={getFavorites}
-            details={handleOpenDetails}
-          />
-          <ContentRow 
-            rowName='Filmes em Alta' 
-            data={trendingMovies}
-            getFavorites={getFavorites}
-            details={handleOpenDetails}
-          />
-          <ContentRow 
-            rowName='Séries em Alta'
-            data={trendingTv} 
-            getFavorites={getFavorites}
-            details={handleOpenDetails}
-          />
-        </ScrollView>
+        <>
+          <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.contentContainer}>
+            <Image
+              source={logo}
+              style={styles.logo}
+            />
+            <View>
+              <Text style={styles.welcome}>Olá, {props.name}!</Text>
+            </View>
+            <ContentRow 
+              rowName='Seus Favoritos' 
+              data={favorites} 
+              getFavorites={getFavorites}
+              details={handleOpenDetails}
+            />
+            <ContentRow 
+              rowName='Filmes em Alta' 
+              data={trendingMovies}
+              getFavorites={getFavorites}
+              details={handleOpenDetails}
+            />
+            <ContentRow 
+              rowName='Séries em Alta'
+              data={trendingTv} 
+              getFavorites={getFavorites}
+              details={handleOpenDetails}
+            />
+          </ScrollView>
+        </>
       )}
     </SafeAreaView>
   )

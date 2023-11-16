@@ -22,6 +22,10 @@ export default function ContentDetails(props) {
     navigation.goBack();
   }
 
+  function handleOpenDetails(item) {
+    navigation.push('ContentDetails', { item });
+  }
+
 
   function getContent(mediaType, idTMDB) {
     const pathParam = mediaType == 'movie' ? 'movies' : 'series';
@@ -45,7 +49,7 @@ export default function ContentDetails(props) {
 
   useEffect(() => {
     getContent(media.mediaType, media.idTMDB);
-  }, [])
+  }, [media])
 
   function getRuntime(runtime) {
     const hours = Math.floor(runtime / 60);
@@ -89,7 +93,7 @@ export default function ContentDetails(props) {
             >
               <Text style={[styles.sectionTitle, styles.text]}>Disponível em:</Text>
             </ScrollView>
-            <ContentRow rowName="Similares" data={similar} />
+            <ContentRow rowName="Similares" data={similar} details={handleOpenDetails} />
           </View>
         </ScrollView>
       )}

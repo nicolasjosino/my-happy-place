@@ -4,7 +4,8 @@ import { themes } from "../../theme/themes";
 export const styles = StyleSheet.create({
   container: {
     flex:1,
-    backgroundColor: themes.background
+    backgroundColor: themes.background,
+    // alignItems: 'center',
   },
   contentContainer: {
     flexGrow: 1,
@@ -13,6 +14,12 @@ export const styles = StyleSheet.create({
   },
   spinner: {
     marginTop: '100%'
+  },
+  logo: {
+    width: 140,
+    height: 100,
+    marginBottom: 50,
+    marginHorizontal: 100,
   },
   welcome: {
     fontSize: 35,
