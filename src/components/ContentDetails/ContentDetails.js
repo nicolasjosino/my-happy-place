@@ -8,7 +8,7 @@ import { themes } from "../../theme/themes";
 import { Pressable } from "react-native";
 
 export default function ContentDetails(props) {
-  
+
   const api = 'http://192.168.1.8:8080';
   const [loading, setLoading] = useState(true);
   const [content, setContent] = useState({});
@@ -66,29 +66,34 @@ export default function ContentDetails(props) {
           <Image style={styles.poster} src={`https://image.tmdb.org/t/p/original${content.backdropPath}`} />
           <View style={{ marginHorizontal: 15 }}>
             <Text style={[styles.title, styles.text]}>{content.name}</Text>
+
             <View style={styles.details}>
               <Text style={[styles.detailsText, styles.text]}>{content?.releaseDate.substring(0, 4)}</Text>
               {media.mediaType == 'movie' &&
                 <Text style={[styles.detailsText, styles.text]}>{getRuntime(content.runtime)}</Text>}
-              {media.mediaType == 'tv' &&
-                <Pressable
-                  style={({ pressed }) => [styles.button, pressed && { opacity: 0.8 }]}
-                >
-                  <Text style={styles.buttonText}>Escolher Episódio</Text>
-                </Pressable>
-              }
               <Favorite isFavorite={content?.isFavorite} />
             </View>
+            
+            {media.mediaType == 'tv' &&
+              <Pressable
+                style={({ pressed }) => [styles.button, pressed && { opacity: 0.8 }]}
+              >
+                <Text style={styles.buttonText}>Escolher Episódio</Text>
+              </Pressable>
+            }
+
             <View>
               <Text style={[styles.sectionTitle, styles.text]}>Sinopse:</Text>
               <Text style={[styles.overview, styles.text]}>{content.overview}</Text>
             </View>
+
             <ScrollView
               horizontal={true}
               contentContainerStyle={styles.whereToWatch}
             >
               <Text style={[styles.sectionTitle, styles.text]}>Disponível em:</Text>
             </ScrollView>
+
             <ContentRow rowName="Similares" data={similar} />
           </View>
         </ScrollView>

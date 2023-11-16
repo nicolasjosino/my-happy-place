@@ -26,10 +26,13 @@ export const styles = StyleSheet.create({
   },
   details: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 35,
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     marginBottom: 25,
+    backgroundColor: themes.softBackground,
+    borderRadius: 10,
+    width: '65%',
+    alignSelf: 'center'
   },
   button: {
     paddingVertical: 9,
@@ -37,11 +40,17 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 3,
     backgroundColor: themes.accent,
+    width: '65%',
+    alignSelf: 'center',
+    marginBottom: 25,
   },
   buttonText: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
     color: themes.text,
-    fontSize: 14,
-    fontWeight: '500'
+    alignSelf: 'center'
   },
   sectionTitle: {
     fontSize: 23,
