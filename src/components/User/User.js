@@ -7,7 +7,7 @@ import { themes } from "../../theme/themes";
 
 import logo from '../../assets/Logo_MHP.png';
 
-export default function User(props) {
+export default function User() {
   const api = 'http://192.168.1.8:8080';
 
   const [loading, setLoading] = useState(true);
@@ -74,7 +74,7 @@ export default function User(props) {
               style={styles.logo}
             />
             <View>
-              <Text style={styles.welcome}>Olá, {props.name}!</Text>
+              <Text style={styles.welcome}>Olá, {username}!</Text>
             </View>
             <ContentRow 
               rowName='Seus Favoritos' 
