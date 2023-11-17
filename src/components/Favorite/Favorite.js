@@ -26,7 +26,8 @@ export default function Favorite(props) {
       body: JSON.stringify(body),
       method: !isFavorite ? 'POST' : 'PUT'
     })
-      .then(setFavorite(!isFavorite));
+      .then(setFavorite(!isFavorite))
+      .then(props.getFavorites);
   }
 
   return (
