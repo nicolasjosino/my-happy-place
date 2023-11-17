@@ -1,14 +1,24 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Divider } from '@rneui/themed';
-import { useState } from "react";
-import { FlatList, Image, Pressable, SafeAreaView, Text, TextInput, View } from "react-native";
+import { useState, useEffect } from "react";
+import { useNavigation } from '@react-navigation/native';
+import { FlatList, Image, SafeAreaView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { styles } from "./styles";
 
 export default function SearchContent() {
   const api = 'http://192.168.1.8:8080';
   const [searchResults, setSearchResults] = useState([]);
-  const [searchText, onChangeText] = useState('');
+  const [searchText, setSearchText] = useState('');
 
+  useEffect(() => {
+    getResults(searchText);
+  }, [searchText])
+
+  const navigation = useNavigation();
+
+  function handleOpenDetails(item) {
+    navigation.navigate('ContentDetails', { item });
+  }
 
   function getResults(search) {
     fetch(`${api}/all-types/multisearch/1?descricao='${search}'&page=1`)
@@ -25,31 +35,43 @@ export default function SearchContent() {
           placeholder="Busque por filmes e séries..."
           placeholderTextColor="gray"
           value={searchText}
-          onChangeText={onChangeText}
+          onChangeText={(t) => setSearchText(t)}
         />
-        <Pressable onPress={(pressed) => getResults(searchText)}>
-          <Ionicons name="search" size={20} style={styles.searchIcon} />
-        </Pressable>
+        <TouchableOpacity style={styles.boxButtonSearch} onPress={(pressed) => getResults(searchText)}>
+            <Ionicons name="search" size={20} style={styles.searchIcon} />
+        </TouchableOpacity>
       </View>
       <FlatList 
         data={searchResults}
         renderItem={({ item }) => {
           return (
-            <View>
-              <View style={styles.resultItem}>
-                <Image
-                  style={styles.poster}
-                  src={`https://image.tmdb.org/t/p/original${item.posterPath}`}
-                />
-                <Text
-                  style={styles.title}
-                  numberOfLines={1}
-                >
-                  {item.name}
-                </Text>
+            <TouchableOpacity onPress={() => handleOpenDetails(item)}>
+              <View>
+                <View style={styles.resultItem}>
+                  <Image
+                    style={styles.poster}
+                    src={`https://image.tmdb.org/t/p/original${item.posterPath}`}
+                  />
+                  <View>
+                    <Text
+                      style={styles.title}
+                      numberOfLines={2}
+                    >
+                      {item.name}
+                    </Text>
+                    <View style={styles.boxDescription}>
+                    <Text
+                      style={styles.description}
+                      numberOfLines={25}
+                    >
+                      {item.overview}
+                    </Text>
+                    </View>
+                  </View>
+                </View>
+                <Divider color='white' style={styles.divider} />
               </View>
-              <Divider color='white' style={styles.divider} />
-            </View>
+            </TouchableOpacity>
           )
         }}
       />

@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import StackRoutes from './stack.routes';
+import StackSearchRoutes from './stack.search.routes';
 import User from '../components/User/User';
 import ContentPicker from '../components/ContentPicker/ContentPicker';
 import SearchContent from '../components/SearchContent/SearchContent';
@@ -40,7 +41,7 @@ function TabRoutes() {
 
       <Tab.Screen
         name="SearchContent"
-        component={SearchContent}
+        component={StackSearchRoutes}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size, focused }) => {

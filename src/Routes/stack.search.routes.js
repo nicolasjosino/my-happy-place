@@ -1,6 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import UserStack from '../components/User/User';
 import ContentDetails from '../components/ContentDetails/ContentDetails';
 import SearchContent from '../components/SearchContent/SearchContent';
 
@@ -14,14 +13,16 @@ function StackRoutes() {
     <Stack.Navigator
       screenOptions={{ headerShown: true }}
     >
+
       <Stack.Screen
-        name="UserStack"
-        component={UserStack}
+        name="SearchStack"
+        component={SearchContent}
         options={{
           gestureEnabled: true,
           headerTransparent: true,
           headerTitle: '',
           headerLeft: null,
+          headerTintColor: themes.accent,
         }}
       />
 
