@@ -15,12 +15,6 @@ export const styles = StyleSheet.create({
     borderRadius: 30,
     marginLeft: 20,
     marginBottom: 10,
-    // flexDirection: 'row',
-    // alignItems: 'center',
-    // padding: 10,
-    // borderRadius: 5,
-    // borderWidth: 3,
-    // borderColor: themes.accent
   },
   input: {
     flex: 1,
@@ -64,7 +58,8 @@ export const styles = StyleSheet.create({
   title: {
     marginLeft: 10,
     color: themes.text,
-    fontWeight: '500'
+    fontWeight: '500',
+    maxWidth: '80%'
   },
   boxDescription: {
     width: 205,
