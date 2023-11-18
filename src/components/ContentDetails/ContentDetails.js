@@ -7,6 +7,7 @@ import ContentRow from "../ContentRow/ContentRow";
 import Favorite from "../Favorite/Favorite";
 import Season from '../Season/Season';
 import { styles } from "./styles";
+import Episode from '../Episode/Episode';
 
 export default function ContentDetails() {
 
@@ -18,6 +19,8 @@ export default function ContentDetails() {
   const [currentSeason, setCurrentSeason] = useState({});
   const [providers, setProviders] = useState([]);
   const [similar, setSimilar] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [chosenEpisode, setChosenEpisode] = useState({});
 
   const navigation = useNavigation();
   const route = useRoute();
@@ -29,6 +32,21 @@ export default function ContentDetails() {
 
   function handleOpenDetails(item) {
     navigation.push('ContentDetails', { item });
+  }
+
+  function openModal() {
+    pickEpisode()
+    setModalVisible(true);
+  }
+
+  function closeModal() {
+    setModalVisible(false);
+  }
+
+  function pickEpisode() {
+    const seasonNumber = Math.floor(Math.random() * seasons.length);
+    const episodeNumber = Math.floor(Math.random() * seasons[seasonNumber].episodes.length);
+    setChosenEpisode(seasons[seasonNumber].episodes[episodeNumber]);
   }
 
   const handlePress = () => setExpanded(!expanded);
@@ -104,10 +122,17 @@ export default function ContentDetails() {
             {media.mediaType == 'tv' &&
               <Pressable
                 style={({ pressed }) => [styles.button, pressed && { opacity: 0.8 }]}
+                onPress={(pressed) => { openModal() }}
               >
                 <Text style={styles.buttonText}>Escolher Episódio</Text>
               </Pressable>
             }
+
+            <Episode 
+              isVisible={modalVisible} 
+              episode={chosenEpisode}
+              onClose={() => closeModal()}
+            />
 
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Sinopse:</Text>

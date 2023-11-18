@@ -4,6 +4,7 @@ import { ImageBackground, Pressable, Text, View } from "react-native";
 import { FavoritesContext } from "../../FavoritesContext";
 import { useNavigation } from '@react-navigation/native';
 import { styles } from "./styles";
+import background from '../../assets/background-tv.jpg';
 
 export default function ContentPicker() {
   const { favorites } = useContext(FavoritesContext);
@@ -15,10 +16,8 @@ export default function ContentPicker() {
       range = favorites.filter((item) => item.mediaType === mediaType);
     }
 
-    console.log(range[Math.floor(Math.random() * range.length)]);
     const chosenContent = (range[Math.floor(Math.random() * range.length)]);
     handleOpenDetails({ idTMDB: chosenContent.idTMDB, mediaType: chosenContent.mediaType });
-
   }
 
   const navigation = useNavigation();
@@ -30,7 +29,7 @@ export default function ContentPicker() {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require('../../assets/background-tv.jpg')}
+        source={background}
         blurRadius={13}
         style={styles.background}
       >
