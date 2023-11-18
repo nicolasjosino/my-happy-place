@@ -1,22 +1,22 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import ContentDetails from '../components/ContentDetails/ContentDetails';
-import SearchContent from '../components/SearchContent/SearchContent';
+import ContentPicker from '../components/ContentPicker/ContentPicker';
 
 import { themes } from '../theme/themes';
 
 
 const Stack = createNativeStackNavigator();
 
-function StackSearchRoutes() {
+function StackPickerRoutes() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: true }}
     >
 
       <Stack.Screen
-        name="SearchStack"
-        component={SearchContent}
+        name="ContentPickerStack"
+        component={ContentPicker}
         options={{
           gestureEnabled: true,
           headerTransparent: true,
@@ -42,4 +42,4 @@ function StackSearchRoutes() {
   )
 }
 
-export default StackSearchRoutes;
+export default StackPickerRoutes;

@@ -1,15 +1,14 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Image, Pressable, ScrollView, Text, View } from "react-native";
 import { List } from 'react-native-paper';
-import { FavoritesContext } from '../../FavoritesContext';
 import { themes } from "../../theme/themes";
 import ContentRow from "../ContentRow/ContentRow";
 import Favorite from "../Favorite/Favorite";
 import Season from '../Season/Season';
 import { styles } from "./styles";
 
-export default function ContentDetails(props) {
+export default function ContentDetails() {
 
   const api = 'http://192.168.0.8:8080';
   const [expanded, setExpanded] = useState(false);

@@ -1,12 +1,11 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import { Ionicons } from '@expo/vector-icons';
+import ContentPicker from '../components/ContentPicker/ContentPicker';
+import { themes } from '../theme/themes';
 import StackRoutes from './stack.routes';
 import StackSearchRoutes from './stack.search.routes';
-import User from '../components/User/User';
-import ContentPicker from '../components/ContentPicker/ContentPicker';
-import SearchContent from '../components/SearchContent/SearchContent';
-import { Ionicons } from '@expo/vector-icons'
-import { themes } from '../theme/themes';
+import StackPickerRoutes from './stack.picker.routes';
 
 
 const Tab = createBottomTabNavigator();
@@ -56,7 +55,7 @@ function TabRoutes() {
 
       <Tab.Screen
         name="ContentPicker"
-        component={ContentPicker}
+        component={StackPickerRoutes}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size, focused }) => {

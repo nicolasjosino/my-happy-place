@@ -4,17 +4,24 @@ import { themes } from "../../theme/themes";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: themes.background
+    backgroundColor: themes.background,
+  },
+  background: {
+    flex: 1
+  },
+  contentContainer: {
+    margin: 15
   },
   header: {
+    marginTop: '25%',
+    marginHorizontal: 20,
     color: themes.text,
     fontSize: 35,
     fontWeight: 'bold',
   },
   buttonGroup: {
-    marginTop: '30%',
+    marginTop: '20%',
     paddingHorizontal: 50
-    // alignSelf: 'center'
   },
   button: {
     paddingVertical: 12,
