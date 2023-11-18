@@ -1,13 +1,22 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useState } from 'react';
-import { Pressable, Text } from 'react-native';
+import { useContext, useState } from 'react';
+import { Pressable } from 'react-native';
+import { FavoritesContext } from '../../FavoritesContext';
 
 export default function Favorite(props) {
-  const api = 'http://192.168.1.8:8080';
+  const api = 'http://192.168.0.8:8080';
   const [isFavorite, setFavorite] = useState(props.isFavorite);
+  const { favorites, setFavorites } = useContext(FavoritesContext);
   let icon = isFavorite ? "md-heart" : "md-heart-outline";
 
-  function changeFavoriteStatus() {
+  function getFavorites() {
+    fetch(`${api}/users/1/findFavorites`)
+      .then(response => response.json())
+      .then(data => setFavorites(data))
+      .catch(error => console.error(error));
+  }
+
+  async function changeFavoriteStatus() {
     let url = `${api}/${props.mediaType == 'tv' ? 'series' : 'movies'}`
     let body = {
       userList: [
@@ -18,7 +27,7 @@ export default function Favorite(props) {
     };
     props.mediaType == 'tv' ? (body.serieId = props.idTMDB) : (body.movieId = props.idTMDB);
 
-    fetch(url, {
+    await fetch(url, {
       headers: {
         'Accept': "application/json, text/plain, */*",
         'Content-Type': "application/json;charset=utf-8"
@@ -27,7 +36,7 @@ export default function Favorite(props) {
       method: !isFavorite ? 'POST' : 'PUT'
     })
       .then(setFavorite(!isFavorite))
-      .then(props.getFavorites);
+    getFavorites();
   }
 
   return (

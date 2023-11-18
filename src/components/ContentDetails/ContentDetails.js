@@ -1,17 +1,23 @@
-import { useEffect, useState } from "react";
-import { ActivityIndicator, Image, ScrollView, Text, View } from "react-native";
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { useContext, useEffect, useState } from "react";
+import { ActivityIndicator, FlatList, Image, Pressable, ScrollView, Text, View } from "react-native";
+import { List } from 'react-native-paper';
+import { FavoritesContext } from '../../FavoritesContext';
+import { themes } from "../../theme/themes";
 import ContentRow from "../ContentRow/ContentRow";
 import Favorite from "../Favorite/Favorite";
+import Season from '../Season/Season';
 import { styles } from "./styles";
-import { themes } from "../../theme/themes";
-import { Pressable } from "react-native";
 
 export default function ContentDetails(props) {
 
-  const api = 'http://192.168.1.8:8080';
+  const api = 'http://192.168.0.8:8080';
+  const [expanded, setExpanded] = useState(false);
   const [loading, setLoading] = useState(true);
   const [content, setContent] = useState({});
+  const [seasons, setSeasons] = useState([]);
+  const [currentSeason, setCurrentSeason] = useState({});
+  const [providers, setProviders] = useState([]);
   const [similar, setSimilar] = useState([]);
 
   const navigation = useNavigation();
@@ -26,29 +32,41 @@ export default function ContentDetails(props) {
     navigation.push('ContentDetails', { item });
   }
 
+  const handlePress = () => setExpanded(!expanded);
+  const handleSeasonPress = (index) => {
+    setExpanded(!expanded);
+    setCurrentSeason(seasons[index]);
+  };
 
-  function getContent(mediaType, idTMDB) {
-    const pathParam = mediaType == 'movie' ? 'movies' : 'series';
-    fetch(`${api}/${pathParam}/${idTMDB}?idUser=1`)
-      .then(response => response.json())
-      .then(data => {
-        setContent(data);
-        getSimilar(mediaType, idTMDB);
-        setLoading(false);
-      })
-      .catch(error => console.error(error));
-  }
+  async function fetchData() {
+    const pathParam = media.mediaType == 'movie' ? 'movies' : 'series';
+    const fetches = [
+      fetch(`${api}/${pathParam}/${media.idTMDB}?idUser=1`)
+        .then(response => response.json())
+        .then(data => setContent(data)),
 
-  function getSimilar(mediaType, idTMDB) {
-    const pathParam = mediaType == 'movie' ? 'movies' : 'series';
-    fetch(`${api}/${pathParam}/${idTMDB}/recommendations?idUser=1&page=1`)
-      .then(response => response.json())
-      .then(data => setSimilar(data))
-      .catch(error => console.error(error));
+      media.mediaType === 'tv' &&
+      fetch(`${api}/series/${media.idTMDB}/seasons?idUser=1`)
+        .then(response => response.json())
+        .then(data => {
+          setSeasons(data)
+          setCurrentSeason(data[0])
+        }),
+
+      fetch(`${api}/${pathParam}/${media.idTMDB}/recommendations?idUser=1&page=1`)
+        .then(response => response.json())
+        .then(data => setSimilar(data)),
+
+      fetch(`${api}/${pathParam}/${media.idTMDB}/watchproviders`)
+        .then(response => response.json())
+        .then(data => setProviders(data.results?.BR?.flatrate))
+    ]
+    await Promise.all(fetches);
+    setLoading(false);
   }
 
   useEffect(() => {
-    getContent(media.mediaType, media.idTMDB);
+    fetchData();
   }, [media])
 
   function getRuntime(runtime) {
@@ -66,7 +84,7 @@ export default function ContentDetails(props) {
           style={styles.spinner}
         />
       ) : (
-        <ScrollView showsVerticalScrollIndicator={false} >
+        <ScrollView showsVerticalScrollIndicator={false}>
           <Image style={styles.poster} src={`https://image.tmdb.org/t/p/original${content.backdropPath}`} />
           <View style={{ marginHorizontal: 15 }}>
             <Text style={[styles.title, styles.text]}>{content.name}</Text>
@@ -75,9 +93,13 @@ export default function ContentDetails(props) {
               <Text style={[styles.detailsText, styles.text]}>{content?.releaseDate.substring(0, 4)}</Text>
               {media.mediaType == 'movie' &&
                 <Text style={[styles.detailsText, styles.text]}>{getRuntime(content.runtime)}</Text>}
-              <Favorite isFavorite={content?.isFavorite} />
+              <Favorite
+                isFavorite={content?.isFavorite}
+                idTMDB={media.idTMDB}
+                mediaType={media.mediaType}
+              />
             </View>
-            
+
             {media.mediaType == 'tv' &&
               <Pressable
                 style={({ pressed }) => [styles.button, pressed && { opacity: 0.8 }]}
@@ -86,18 +108,59 @@ export default function ContentDetails(props) {
               </Pressable>
             }
 
-            <View>
-              <Text style={[styles.sectionTitle, styles.text]}>Sinopse:</Text>
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Sinopse:</Text>
               <Text style={[styles.overview, styles.text]}>{content.overview}</Text>
             </View>
 
-            <ScrollView
-              horizontal={true}
-              contentContainerStyle={styles.whereToWatch}
-            >
-              <Text style={[styles.sectionTitle, styles.text]}>Disponível em:</Text>
-            </ScrollView>
-            <ContentRow rowName="Similares" data={similar} details={handleOpenDetails} />
+            {media.mediaType == 'tv' &&
+              <View style={styles.section}>
+                <List.Accordion
+                  theme={{ colors: { background: themes.softBackground } }}
+                  titleStyle={styles.accordionTitle}
+                  title="Temporadas"
+                  expanded={expanded}
+                  onPress={handlePress}
+                  left={props => <List.Icon {...props} color={themes.accent} icon="television" />}
+                >
+                  {seasons?.map((season, index) => {
+                    return (
+                      <List.Item
+                        key={index}
+                        title={`Temporada ${index + 1}`}
+                        titleStyle={styles.text}
+                        onPress={(pressed) => {pressed && handleSeasonPress(index)}}
+                      />
+                    )
+                  })}
+                </List.Accordion>
+                <Season season={currentSeason} />
+              </View>
+            }
+
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>Disponível em:</Text>
+              <FlatList
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                data={providers}
+                renderItem={({ item }) => {
+                  return (
+                    <Image
+                      src={`https://image.tmdb.org/t/p/original${item.logo_path}`}
+                      style={styles.providerLogo}
+                    />
+                  )
+                }}
+              />
+            </View>
+
+            <ContentRow
+              rowName="Similares"
+              fontSize={20}
+              data={similar}
+              details={handleOpenDetails}
+            />
           </View>
         </ScrollView>
       )}

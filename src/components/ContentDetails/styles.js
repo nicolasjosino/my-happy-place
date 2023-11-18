@@ -53,9 +53,10 @@ export const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   sectionTitle: {
-    fontSize: 23,
+    fontSize: 20,
     fontWeight: 'bold',
-    marginVertical: 10
+    marginVertical: 10,
+    color: themes.text
   },
   detailsText: {
     fontWeight: '300'
@@ -63,7 +64,22 @@ export const styles = StyleSheet.create({
   overview: {
     marginHorizontal: 10
   },
-  whereToWatch: {
-    marginVertical: 15
+  section: {
+    marginVertical: 15,
+  },
+  providerLogo: {
+    width: 60,
+    height: 60,
+    borderRadius: 15,
+    margin: 10
+  },
+  accordion: {
+    backgroundColor: themes.softBackground,
+  },
+  accordionTitle: {
+    left: 0,
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 20,
   }
 })

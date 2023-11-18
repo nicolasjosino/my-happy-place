@@ -1,20 +1,21 @@
-import { ActivityIndicator, SafeAreaView, ScrollView, Text, View, Image } from "react-native";
+import { ActivityIndicator, SafeAreaView, ScrollView, Text, View, Image, Pressable } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import ContentRow from "../ContentRow/ContentRow";
 import { styles } from "./styles";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { FavoritesContext } from "../../FavoritesContext";
 import { themes } from "../../theme/themes";
 
 import logo from '../../assets/Logo_MHP.png';
 
 export default function User() {
-  const api = 'http://192.168.1.8:8080';
+  const api = 'http://192.168.0.8:8080';
 
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState('');
-  const [favorites, setFavorites] = useState([]);
   const [trendingTv, setTrendingTv] = useState([]);
   const [trendingMovies, setTrendingMovies] = useState([]);
+  const { favorites, setFavorites } = useContext(FavoritesContext);
 
   const navigation = useNavigation();
 
@@ -76,22 +77,22 @@ export default function User() {
             <View>
               <Text style={styles.welcome}>Olá, {username}!</Text>
             </View>
-            <ContentRow 
-              rowName='Seus Favoritos' 
-              data={favorites} 
-              getFavorites={getFavorites}
+            <ContentRow
+              rowName='Seus Favoritos'
+              fontSize={23}
+              data={favorites}
               details={handleOpenDetails}
             />
-            <ContentRow 
-              rowName='Filmes em Alta' 
+            <ContentRow
+              rowName='Filmes em Alta'
+              fontSize={23}
               data={trendingMovies}
-              getFavorites={getFavorites}
               details={handleOpenDetails}
             />
-            <ContentRow 
+            <ContentRow
               rowName='Séries em Alta'
-              data={trendingTv} 
-              getFavorites={getFavorites}
+              fontSize={23}
+              data={trendingTv}
               details={handleOpenDetails}
             />
           </ScrollView>

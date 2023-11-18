@@ -6,7 +6,7 @@ import { FlatList, Image, SafeAreaView, Text, TextInput, TouchableOpacity, View 
 import { styles } from "./styles";
 
 export default function SearchContent() {
-  const api = 'http://192.168.1.8:8080';
+  const api = 'http://192.168.0.8:8080';
   const [searchResults, setSearchResults] = useState([]);
   const [searchText, setSearchText] = useState('');
 
@@ -55,7 +55,7 @@ export default function SearchContent() {
                   <View>
                     <Text
                       style={styles.title}
-                      numberOfLines={2}
+                      numberOfLines={1}
                     >
                       {item.name}
                     </Text>

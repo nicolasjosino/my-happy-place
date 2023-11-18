@@ -19,7 +19,6 @@ export default function ContentCard(props) {
           isFavorite={props.isFavorite}
           idTMDB={props.idTMDB}
           mediaType={props.mediaType}
-          getFavorites={props.getFavorites}
         />
       </View>
     </View>

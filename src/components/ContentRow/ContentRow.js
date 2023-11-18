@@ -6,7 +6,7 @@ export default function ContentRow(props) {
   return (
     
       <View style={styles.contentRow}>
-        <Text style={styles.title}>{props.rowName}:</Text>
+        <Text style={[styles.title, {fontSize: props.fontSize}]}>{props.rowName}:</Text>
         <FlatList
           horizontal={true}
           showsHorizontalScrollIndicator={false}
@@ -23,7 +23,6 @@ export default function ContentRow(props) {
                   mediaType={item.mediaType}
                   releaseDate={item.releaseDate}
                   isFavorite={item.isFavorite}
-                  getFavorites={props.getFavorites}
                 />
               </TouchableOpacity>
             )
