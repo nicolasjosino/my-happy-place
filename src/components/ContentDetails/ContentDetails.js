@@ -141,6 +141,11 @@ export default function ContentDetails() {
 
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Disponível em:</Text>
+              {!providers &&
+                <Text style={styles.unavailable}>
+                  Não foram encontrados serviços disponíveis para {content.name}.
+                </Text>
+              }
               <FlatList
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}

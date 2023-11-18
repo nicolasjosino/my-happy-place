@@ -73,6 +73,11 @@ export const styles = StyleSheet.create({
     borderRadius: 15,
     margin: 10
   },
+  unavailable: {
+    color: themes.text,
+    marginHorizontal: 30,
+    marginVertical: 15
+  },
   accordion: {
     backgroundColor: themes.softBackground,
   },
