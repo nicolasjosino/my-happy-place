@@ -83,7 +83,9 @@ export default function ContentDetails() {
           style={styles.spinner}
         />
       ) : (
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+        >
           <Image style={styles.poster} src={`https://image.tmdb.org/t/p/original${content.backdropPath}`} />
           <View style={{ marginHorizontal: 15 }}>
             <Text style={[styles.title, styles.text]}>{content.name}</Text>
@@ -128,7 +130,7 @@ export default function ContentDetails() {
                         key={index}
                         title={`Temporada ${index + 1}`}
                         titleStyle={styles.text}
-                        onPress={(pressed) => {pressed && handleSeasonPress(index)}}
+                        onPress={(pressed) => { pressed && handleSeasonPress(index) }}
                       />
                     )
                   })}

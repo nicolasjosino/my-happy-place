@@ -14,14 +14,13 @@ export const styles = StyleSheet.create({
     marginBottom: 15
   },
   episodeContainer: {
-    marginVertical: 20,
+    marginHorizontal: 20,
     width: 300,
-    alignSelf: 'center'
   },
   episodeImage: {
     alignSelf: 'center',
     width: 300,
-    height: 130,
+    height: 150,
     borderRadius: 15,
     borderWidth: 3,
     borderColor: themes.accent
@@ -29,7 +28,7 @@ export const styles = StyleSheet.create({
   episodeDetails: {
     paddingHorizontal: 5,
     marginTop: 10
-  },  
+  },
   episodeName: {
     color: themes.text,
     fontSize: 15,

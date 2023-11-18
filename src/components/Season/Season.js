@@ -8,6 +8,8 @@ export default function Season(props) {
     <View style={styles.container}>
       <Text style={styles.title}>Temporada {season?.episodes[0].seasonNumber}</Text>
       <FlatList
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
         data={season?.episodes}
         renderItem={({ item: episode }) => {
           return (
@@ -18,8 +20,19 @@ export default function Season(props) {
                 style={styles.episodeImage}
               />
               <View style={styles.episodeDetails}>
-                <Text style={styles.episodeName}>{episode.episodeNumber} - {episode.name}</Text>
-                <Text style={styles.text}>{episode.overview}</Text>
+                <Text
+                  style={styles.episodeName}
+                  numberOfLines={2}
+
+                >
+                  {episode.episodeNumber} - {episode.name}
+                </Text>
+                <Text
+                  style={styles.text}
+                  numberOfLines={10}
+                >
+                  {episode.overview}
+                </Text>
               </View>
             </View>
           );
