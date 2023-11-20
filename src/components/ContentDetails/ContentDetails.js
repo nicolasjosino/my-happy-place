@@ -11,7 +11,7 @@ import Episode from '../Episode/Episode';
 
 export default function ContentDetails() {
 
-  const api = 'http://192.168.0.8:8080';
+  const api = 'http://192.168.0.11:8080';
   const [expanded, setExpanded] = useState(false);
   const [loading, setLoading] = useState(true);
   const [content, setContent] = useState({});
@@ -119,7 +119,7 @@ export default function ContentDetails() {
               />
             </View>
 
-            {media.mediaType == 'tv' &&
+            {media.mediaType == 'tv' && seasons.length > 0 &&
               <Pressable
                 style={({ pressed }) => [styles.button, pressed && { opacity: 0.8 }]}
                 onPress={(pressed) => { openModal() }}
@@ -128,8 +128,8 @@ export default function ContentDetails() {
               </Pressable>
             }
 
-            <Episode 
-              isVisible={modalVisible} 
+            <Episode
+              isVisible={modalVisible}
               episode={chosenEpisode}
               onClose={() => closeModal()}
             />
@@ -139,7 +139,7 @@ export default function ContentDetails() {
               <Text style={[styles.overview, styles.text]}>{content.overview}</Text>
             </View>
 
-            {media.mediaType == 'tv' &&
+            {media.mediaType == 'tv' && seasons.length > 0 &&
               <View style={styles.section}>
                 <List.Accordion
                   theme={{ colors: { background: themes.softBackground } }}

@@ -12,22 +12,22 @@ export default function Episode(props) {
       visible={props.isVisible}
     >
       <SafeAreaView style={styles.container}>
-        <View style={{}}>
-          <Ionicons
-            name="close-circle-outline"
-            size={50}
-            color={'white'}
-            onPress={props.onClose}
-            style={styles.closeButton}
+        <Ionicons
+          name="close-circle-outline"
+          size={50}
+          color={'white'}
+          onPress={props.onClose}
+          style={styles.closeButton}
+        />
+
+        <View style={styles.episodeContainer}>
+          <Image
+            src={`https://image.tmdb.org/t/p/original${episode.stillPath}`}
+            resizeMode="stretch"
+            style={styles.episodeImage}
           />
 
-          <View style={styles.episodeContainer}>
-            <Image
-              src={`https://image.tmdb.org/t/p/original${episode.stillPath}`}
-              resizeMode="stretch"
-              style={styles.episodeImage}
-            />
-
+          <View style={styles.episodeDetails}>
             <Text style={styles.season}>Temporada {episode.seasonNumber}</Text>
             <Text
               style={styles.episodeName}

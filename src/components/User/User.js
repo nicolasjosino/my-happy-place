@@ -9,7 +9,7 @@ import { themes } from "../../theme/themes";
 import logo from '../../assets/Logo_MHP.png';
 
 export default function User() {
-  const api = 'http://192.168.0.8:8080';
+  const api = 'http://192.168.0.11:8080';
 
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState('');

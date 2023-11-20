@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
   episodeContainer: {
-    marginTop: 100,
+    marginTop: 150,
     marginHorizontal: 40,
   },
   episodeImage: {

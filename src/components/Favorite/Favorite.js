@@ -4,7 +4,7 @@ import { Pressable } from 'react-native';
 import { FavoritesContext } from '../../FavoritesContext';
 
 export default function Favorite(props) {
-  const api = 'http://192.168.0.8:8080';
+  const api = 'http://192.168.0.11:8080';
   const [isFavorite, setFavorite] = useState(props.isFavorite);
   const { favorites, setFavorites } = useContext(FavoritesContext);
   let icon = isFavorite ? "md-heart" : "md-heart-outline";
